@@ -37,7 +37,6 @@ def part1(record_of_games: dict):
     for game in record_of_games.keys():
         is_valid_game = True
         for gameSet in record_of_games[game].keys():
-            print(record_of_games[game][gameSet])
             for color in record_of_games[game][gameSet].keys():
                 if int(record_of_games[game][gameSet][color]) > bagOfCubes[color]["total_in_bag"]:
                     is_valid_game = False
@@ -46,8 +45,25 @@ def part1(record_of_games: dict):
     return valid_game_id_sum
 
 
-def part2(data: List[str]):
-    """Solve part 2."""
+def part2(record_of_games: dict):
+    """Solve part 2.
+    Get total of the minimum amount of cubes in a game that make the game possible"""
+    power_of_cubes_sum = 0
+    for game in record_of_games.keys():
+        min_possible_cubes = {
+            "red": 0,
+            "green": 0,
+            "blue": 0
+        }
+        for gameSet in record_of_games[game].keys():
+            for color in record_of_games[game][gameSet].keys():
+                if min_possible_cubes[color] < int(record_of_games[game][gameSet][color]):
+                    min_possible_cubes[color] = int(record_of_games[game][gameSet][color])
+        power_of_cubes = min_possible_cubes["red"] * min_possible_cubes["green"] * min_possible_cubes["blue"]
+        power_of_cubes_sum += power_of_cubes
+
+    return power_of_cubes_sum
+
 
 
 def solve(puzzle_input):
