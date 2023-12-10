@@ -17,6 +17,9 @@ def part1(data: list[list[str]]):
         for j in range(len(data[i])):
             if data[i][j].isdigit():
                 num_group.append((i,j))
+                if j == len(data[i]) - 1:
+                    num_group_coords.append(num_group)
+                    num_group = []
             else:
                 if len(num_group) > 0:
                     num_group_coords.append(num_group)
@@ -28,10 +31,10 @@ def part1(data: list[list[str]]):
             for dx, dy in directions:
                 ni, nj = i + dx, j + dy
                 if 0 <= ni < len(data) and 0 <= nj < len(data[i]) and data[ni][nj] not in ["."] and (ni, nj) not in num_group:
+                    print(num_group)
                     valid_group = True
         if valid_group:
             sum_of_valid_groups += int("".join(data[i][j] for i, j in num_group))
-    # Keeps saying input is too low...
     return sum_of_valid_groups
 
 def part2(data: list[list[str]]):
