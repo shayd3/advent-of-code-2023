@@ -1,4 +1,5 @@
 #aoc2023_template.py
+# TODO: Complete part 2
 import pathlib
 import sys
 from typing import List
@@ -8,7 +9,9 @@ def parse(puzzle_input: str):
     return [list(line) for line in puzzle_input.split('\n')]
 
 def part1(data: list[list[str]]):
-    """Solve part 1."""
+    """Solve part 1.
+    This could probably be good to use some sort of regex to find the numbers in each line
+    """
     sum_of_valid_groups = 0
     directions = [(0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (-1, -1), (1, -1), (-1, 1)]  # right, down, left, up, right-down, left-up, right-up, left-down
     num_group_coords: List[List[tuple[int, int]]] = []
