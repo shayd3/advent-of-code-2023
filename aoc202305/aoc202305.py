@@ -67,6 +67,9 @@ def part2(seeds: List[int], maps: List[str]):
     because the range of seeds is too large (program will literally not finish).
     Need to figure out how to modify the "get_location" function to work with
     a range of seed inputs rather than a single seed input.
+
+    Definitely some fun interval math to be had here.
+    Might need to have the input be a list of intervals and the output to be a list of intervals?
     """
     seed_maps = [convert_map(map_info) for map_info in maps]
     seed_pairs = list(zip(seeds[::2], seeds[1::2]))
