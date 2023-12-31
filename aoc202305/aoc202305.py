@@ -40,6 +40,7 @@ def get_location(seed:int, seed_map: List[tuple]):
             return seed + dest - src
     return seed
 
+
 def part1(seeds: List[int], maps: List[str]):
     """Solve part 1.
 
@@ -61,8 +62,22 @@ def part1(seeds: List[int], maps: List[str]):
     return min(locations)
 
 def part2(seeds: List[int], maps: List[str]):
-    """Solve part 2."""
-
+    """Solve part 2.
+    Can't just extend the list of seeds by the given length with each pair
+    because the range of seeds is too large (program will literally not finish).
+    Need to figure out how to modify the "get_location" function to work with
+    a range of seed inputs rather than a single seed input.
+    """
+    seed_maps = [convert_map(map_info) for map_info in maps]
+    seed_pairs = list(zip(seeds[::2], seeds[1::2]))
+    print(seed_pairs)
+    locations = []
+    for seed in seeds:
+        print(seed)
+        for seed_map in seed_maps:
+            seed = get_location(seed, seed_map)
+        locations.append(seed)
+    return min(locations)
 
 def solve(puzzle_input: str):
     """Solve the puzzle for the given input."""
