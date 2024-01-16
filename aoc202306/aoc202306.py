@@ -4,7 +4,7 @@ import pathlib
 import sys
 from typing import List
 
-def parse(puzzle_input: str):
+def parse_part1(puzzle_input: str):
     """Parse input."""
     race_document = puzzle_input.splitlines()
     race_time, race_distance = [race for race in race_document]
@@ -12,6 +12,14 @@ def parse(puzzle_input: str):
     race_distance = [int(rd) for rd in race_distance.split(":")[1].split()]
     races = list(zip(race_time, race_distance))
     return races
+
+def parse_part2(puzzle_input: str):
+    """Parse input."""
+    race_document = puzzle_input.splitlines()
+    race_time, race_distance = [race for race in race_document]
+    race_time = int(race_time.split(":")[1].replace(" ", ""))
+    race_distance = int(race_distance.split(":")[1].replace(" ", ""))
+    return (race_time, race_distance)
 
 def part1(races: List[tuple[int,int]]):
     """Solve part 1.
@@ -41,15 +49,31 @@ def part1(races: List[tuple[int,int]]):
 
     return reduce(lambda x,y: x*y, race_win_possibility_counts)
 
-def part2(data: List[tuple[int,int]]):
-    """Solve part 2."""
+def part2(race: tuple[int,int]):
+    """Solve part 2.
+
+    Same as part 1, but it's just a single race now, same input.
+    """
+    win_possibility_count = 0
+    race_time, race_record_distance = race
+
+    for button_hold_time in range(race_time+1):
+        travel_time = race_time - button_hold_time
+        distance_traveled = travel_time * button_hold_time
+        if(distance_traveled > race_record_distance):
+            win_possibility_count += 1
+
+    # TODO: this is a REALLY long execution time, work on making this more effecient
+    return win_possibility_count
+
 
 
 def solve(puzzle_input: str):
     """Solve the puzzle for the given input."""
-    data = parse(puzzle_input)
-    solution1 = part1(data)
-    solution2 = part2(data)
+    data1 = parse_part1(puzzle_input)
+    data2 = parse_part2(puzzle_input)
+    solution1 = part1(data1)
+    solution2 = part2(data2)
 
     return solution1, solution2
 
