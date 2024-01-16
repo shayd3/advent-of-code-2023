@@ -63,7 +63,8 @@ def part2(race: tuple[int,int]):
         if(distance_traveled > race_record_distance):
             win_possibility_count += 1
 
-    # TODO: this is a REALLY long execution time, work on making this more effecient
+    # This is a very brute-force naive solution... It took less than 10 seconds to execute?
+    # Apparently this is a quadratic problem according to Reddit.
     return win_possibility_count
 
 
