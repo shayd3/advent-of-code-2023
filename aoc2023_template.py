@@ -28,4 +28,5 @@ if __name__ == "__main__":
         print(f"{path}:")
         puzzle_input = pathlib.Path(path).read_text().strip()
         solutions = solve(puzzle_input)
-        print("\n".join(str(solution) for solution in solutions))
+        print("Part 1:", solutions[0])
+        print("Part 2:", solutions[1])
