@@ -44,7 +44,6 @@ def part1(races: List[tuple[int,int]]):
             distance_traveled = travel_time * button_hold_time
             if(distance_traveled > race_record_distance):
                 possibility_count += 1
-        print(possibility_count)
         race_win_possibility_counts.append(possibility_count)
 
     return reduce(lambda x,y: x*y, race_win_possibility_counts)
