@@ -7,8 +7,35 @@ def parse(puzzle_input: str):
     """Parse input."""
     return [(hand, int(bid)) for line in puzzle_input.splitlines() for hand, bid in (line.split(),)]
 
+def evaluate_hand(line: tuple[str, int]):
+    hand, bid = line
+    # Translating to ABCDE due to how `sorted` orders characters
+    hand = hand.translate(str.maketrans('TJQKA', 'ABCDE'))
+    best = max(calculate_type(hand))
+    return best, hand, int(bid)
+
+def calculate_type(hand: str):
+    hand_counts = map(hand.count, hand)
+    return sorted(hand_counts, reverse=True)
+
 def part1(data: List[tuple[str, int]]):
-    """Solve part 1."""
+    """Solve part 1.
+
+    Rank the hands based on the order of how good the hand is
+    Once the array is in order, take the bid of that hand and multiple it by the rank position
+
+    i.e. [hand1, hand2, hand3, hand4, hand5] => {
+        hand1*1 + hand2*2 + hand3*3 + hand4*4 + hand*5
+    }
+    """
+    evaluated_hands = map(evaluate_hand, data)
+    sorted_hands = sorted(evaluated_hands)
+
+    total = 0
+    for rank, hand in enumerate(sorted_hands, start=1):
+        _, _, bid = hand
+        total += rank * bid
+    return total
 
 
 def part2(data: List[tuple[str, int]]):
