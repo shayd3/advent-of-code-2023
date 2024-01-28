@@ -25,7 +25,7 @@ def part1(data: List[tuple[str, int]]):
     Once the array is in order, take the bid of that hand and multiple it by the rank position
 
     i.e. [hand1, hand2, hand3, hand4, hand5] => {
-        hand1*1 + hand2*2 + hand3*3 + hand4*4 + hand*5
+        hand1*1 + hand2*2 + hand3*3 + hand4*4 + hand5*5
     }
     """
     evaluated_hands = map(evaluate_hand, data)
